@@ -1,5 +1,5 @@
 //Dependencies
-var express = require ("express");
+var express = require("express");
 var mysql = require("mysql");
 // var inquire = require('inquirer')
 
@@ -18,7 +18,7 @@ var connection = mysql.createConnection({
 });
 
 //Initiate mySQl Connection
-connection.connect(function(err) {
+connection.connect(function (err) {
     if (err) {
         console.error("error connecting:" + err.stack);
         return;
@@ -31,36 +31,58 @@ connection.connect(function(err) {
 //Inquirer Prompts for User
 
 //Add Departments, Roles, Employees
+//WHERE DO I ADD CONNECTION.QUERY?
 function addDRE() {
     inquirer
-    .prompt({
-        type: "list",
-        name: "add DRE",
-        message: "Choose an item to add to the table",
-        choices: ["Department", "Role", "Employee"]
-    })
-    .then(function(answer) {
-        connection.query(
-//Figure out how to add depts, roles, and employees here
-        );
-    });
+        .prompt({
+            type: "list",
+            name: "addDRE",
+            message: "Choose an item to add to the table",
+            choices: ["Department", "Role", "Employee"]
+        })
+        .then(function (answer) {
+                //Add the item that the user chose
+                if (answer.addDRE === "Department") {
+                    addDept();
+                }
+                else if (answer.addDRE === "Role") {
+                    addRole();
+                }
+                else if (answer.addDRE === "Employee") {
+                    addEmployee();
+                }
+        });
+    }
 
-//View Departments, Roles, and Employees
+    function addDept(){}
+    function addRole(){}
+    function addDept(){}
 
-//WHERE SHOULD VIEWDRE(); BE CALLED?
-function viewDRE() {
-    inquirer
-    .prompt({
-        type: "list",
-        name: "view DRE",
-        message: "Choose an item to view",
-        choices: ["Department", "Role", "Employee"]
-    })
-    .then(function(answer) {
-        connection.query(
-//Figure out how to add depts, roles, and employees here
-        );
-    });
-}
+    //View Departments, Roles, and Employees
 
+    //WHERE SHOULD VIEWDRE(); BE CALLED?
+    function viewDRE() {
+        inquirer
+            .prompt({
+                type: "list",
+                name: "view DRE",
+                message: "Choose an item to view",
+                choices: ["Department", "Role", "Employee"]
+            })
+            .then(function (answer) {
+                connection.query(
+                    //Figure out how to add depts, roles, and employees here
+                );
+            });
+    }
+
+//WHERE SHOULD UPDATE ROLES BE CALLED?
+    function updateRoles() {
+        inquirer
+        .prompt({
+        })
+        .then(function(answer)) {
+            connection.query
+        }
+    }
 

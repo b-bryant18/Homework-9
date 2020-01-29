@@ -35,6 +35,13 @@ CREATE TABLE department
         -- NULL if employee is the manager
     );
 
+    INSERT INTO ? (id) VALUES 
+-- Read function
+    SELECT * FROM (department, role, employee);
+
+    -- Update function
+    -- UPDATE role SET ? WHERE
+
 -- //FK: Foreign Key is how you connect tables by ID, specify in the table. Column in primary key, dept id
 -- PK: Primary Key is unique to a table
 -- Employee tables has an FK unique to itself bc manager is an employee.
