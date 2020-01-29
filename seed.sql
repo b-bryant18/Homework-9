@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS employeeDatabase;
-CREATE DATABASE employeeDatabase;
-USE employeeDatabase;
+DROP DATABASE IF EXISTS employee_db;
+CREATE DATABASE employee_db;
+USE employee_db;
 
 CREATE TABLE department
 (
@@ -15,8 +15,8 @@ CREATE TABLE department
         id INT NOT NULL PRIMARY KEY,
         title VARCHAR(30),
         salary DECIMAL (7, 2),
-        -- Related to department ID in department table. --
-        departmentId INT
+        -- Related to department ID in department table.(department_id - INT reference to department role belongs to) --
+        department_id INT
         foreign key (department_id)
         references department(id)
         on delete cascade
@@ -29,10 +29,14 @@ CREATE TABLE department
         id INT PRIMARY KEY,
         firstName VARCHAR(30),
         lastName VARCHAR(30),
-        roleId INT,
+        role_id INT,
         -- This id is referencing another employee's id; the manager of this particular employee. --
-        managerId INT
+        manager_id INT NULL
+        -- NULL if employee is the manager
     );
+
 -- //FK: Foreign Key is how you connect tables by ID, specify in the table. Column in primary key, dept id
 -- PK: Primary Key is unique to a table
 -- Employee tables has an FK unique to itself bc manager is an employee.
+
+-- //Get server to work, get tables to work in workbench, make inquirer prompts, join tables
