@@ -29,7 +29,8 @@ connection.connect(function(err) {
 });
 
 //Inquirer Prompts for User
-//Add departments, roles, employees
+
+//Add Departments, Roles, Employees
 function addDRE() {
     inquirer
     .prompt({
@@ -38,6 +39,28 @@ function addDRE() {
         message: "Choose an item to add to the table",
         choices: ["Department", "Role", "Employee"]
     })
+    .then(function(answer) {
+        connection.query(
+//Figure out how to add depts, roles, and employees here
+        );
+    });
+
+//View Departments, Roles, and Employees
+
+//WHERE SHOULD VIEWDRE(); BE CALLED?
+function viewDRE() {
+    inquirer
+    .prompt({
+        type: "list",
+        name: "view DRE",
+        message: "Choose an item to view",
+        choices: ["Department", "Role", "Employee"]
+    })
+    .then(function(answer) {
+        connection.query(
+//Figure out how to add depts, roles, and employees here
+        );
+    });
 }
 
 
