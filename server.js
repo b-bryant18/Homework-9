@@ -25,64 +25,121 @@ connection.connect(function (err) {
     }
     console.log("Connected as id" + connection.threadId);
     //Runs the add Dept, Role, or Employee function defined below
-    addDRE();
+    addViewUpdate();
 });
 
 //Inquirer Prompts for User
 
 //Add Departments, Roles, Employees
 //WHERE DO I ADD CONNECTION.QUERY?
+function addViewUpdate() {
+    inquirer
+        .prompt({
+            type: "list",
+            name: "addViewUpdate",
+            message: "Would you like to add DRE, view DRE, or update an employee profile?",
+            choices: ["Add", "View", "Update", "Exit"]
+        })
+        .then(function (answer) {
+            //Add the item that the user chose
+            if (answer.addViewUpdate === "Add") {
+                addDRE();
+            }
+            else if (answer.addViewUpdate === "View") {
+              viewDRE();
+            }
+            else if (answer.addViewUpdate === "Update") {
+                updateEmployee();
+            }
+            else {
+                connection.end();
+            }
+        });
+}
 function addDRE() {
     inquirer
         .prompt({
             type: "list",
             name: "addDRE",
-            message: "Choose an item to add to the table",
-            choices: ["Department", "Role", "Employee"]
+            message: "Choose an item to add",
+            choices: ["Department", "Role", "Employee", "Exit"]
         })
         .then(function (answer) {
-                //Add the item that the user chose
-                if (answer.addDRE === "Department") {
-                    addDept();
-                }
-                else if (answer.addDRE === "Role") {
-                    addRole();
-                }
-                else if (answer.addDRE === "Employee") {
-                    addEmployee();
-                }
+            if (answer.addDRE === "Department") {
+                //ADD DEPT
+            }
+            else if (answer.addDRE === "Role") {
+                //ADD ROLE
+            }
+            else if (answer.addDRE === "Employee") {
+                //ADD EMPLOYEE
+            }
+            else {
+                connection.end();
+            }
+            viewDRE();
         });
-    }
 
-    function addDept(){}
-    function addRole(){}
-    function addDept(){}
+        function viewDRE() {
+            inquirer
+                .prompt({
+                    type: "list",
+                    name: "viewDRE",
+                    message: "Choose an item to view",
+                    choices: ["Department", "Role", "Employee", "Exit"]
+                })
+                .then(function (answer) {
+                    if (answer.viewDRE === "Department") {
+                        //VIEW DEPT
+                        connection.query("SELECT * FROM .......", function(err, data){
+                            //We need to get the data back from the server before calling updateEmployee
+                            updateEmployee();
+                        })
+                    }
+                    else if (answer.viewDRE === "Role") {
+                        //VIEW DEPT
+                    }
+                    else if (answer.viewDRE === "Employee") {
+                        //VIEW DEPT
+                    }
+                    else {
+                        connection.end();
+                    }
+                    
+                });
 
-    //View Departments, Roles, and Employees
+                function updateEmployee() {
+                    inquirer
+                        .prompt({
+                            type: "list",
+                            name: "updateEmployee",
+                            message: "Choose an employee to update",
+                            //Add list of employees here
+                            choices: ["Department", "Role", "Employee", "Exit"]
+                        })
+                        .then(function (answer) {
+                            if (answer.updateEmployee === "Department") {
+                                //VIEW DEPT
+                            }
+                            else if (answer.updateEmployee === "Role") {
+                                //VIEW DEPT
+                            }
+                            else if (answer.updateEmployee === "Employee") {
+                                //VIEW DEPT
+                            }
+                            else {
+                                connection.end();
+                            }
+                        });
+                
+        
 
-    //WHERE SHOULD VIEWDRE(); BE CALLED?
-    function viewDRE() {
-        inquirer
-            .prompt({
-                type: "list",
-                name: "view DRE",
-                message: "Choose an item to view",
-                choices: ["Department", "Role", "Employee"]
-            })
-            .then(function (answer) {
-                connection.query(
-                    //Figure out how to add depts, roles, and employees here
-                );
-            });
-    }
+    //Need to call functions in here but can define them elsewhere
+    
+}
 
-//WHERE SHOULD UPDATE ROLES BE CALLED?
-    function updateRoles() {
-        inquirer
-        .prompt({
-        })
-        .then(function(answer)) {
-            connection.query
-        }
-    }
+
+
+//View Departments, Roles, and Employees
+
 
