@@ -23,9 +23,9 @@ VALUES
 ("Mags", "Smith", 4, NULL),
 ("Kimi", "Smith" 5, 4),
 ("Josh", "Smith" 6, 4),
-("Hank", "Hill", 7, NULL),
-("Bobby", "Hill" 8, 7),
-("Peggy", "Hill" 9, 7),
+("Jerry", "Seinfeld", 7, NULL),
+("George", "Seinfeld" 8, 7),
+("Elaine", "Seinfeld" 9, 7),
 
 
 

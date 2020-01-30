@@ -1,4 +1,4 @@
-module.exports = function (app) {
+module.exports = function index {
     function addDept() {
         console.log("Adding new department\n");
         var query = connection.query(
@@ -49,14 +49,14 @@ module.exports = function (app) {
     //View Functions
     function viewDept() {
         connection.query(
-            "SELECT * FROM department WHERE name = ?",
+            "SELECT * FROM department WHERE deptName = ?",
             function (err, res) {
                 if (err) throw err;
             })
     }
     function viewRole() {
         connection.query(
-            "SELECT * FROM department WHERE name = ?",
+            "SELECT * FROM department WHERE title = ?",
             function (err, res) {
                 if (err) throw err;
             })
@@ -64,7 +64,7 @@ module.exports = function (app) {
 
     function viewEmployee() {
         connection.query(
-            "SELECT * FROM department WHERE name = ?",
+            "SELECT * FROM department WHERE firstname = ?",
             function (err, res) {
                 if (err) throw err;
             })
@@ -87,6 +87,4 @@ module.exports = function (app) {
             }
         )
     }
-}
-
 }

@@ -1,9 +1,9 @@
 //Dependencies
-var express = require("express");
-var mysql = require("mysql");
-var inquirer = require("inquirer");
+const express = require("express");
+const mysql = require("mysql");
+const inquirer = require("inquirer");
 const index = require("./index");
-// var inquire = require('inquirer')
+var inquire = require('inquirer')
 
 //Variable for running the express method
 var app = express();
