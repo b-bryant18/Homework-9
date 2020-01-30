@@ -1,6 +1,8 @@
 //Dependencies
 var express = require("express");
 var mysql = require("mysql");
+var inquirer = require("inquirer");
+const index = require("./index");
 // var inquire = require('inquirer')
 
 //Variable for running the express method
@@ -25,121 +27,54 @@ connection.connect(function (err) {
     }
     console.log("Connected as id" + connection.threadId);
     //Runs the add Dept, Role, or Employee function defined below
-    addViewUpdate();
+    // addViewUpdate();
+    addDRE();
 });
 
 //Inquirer Prompts for User
 
-//Add Departments, Roles, Employees
-//WHERE DO I ADD CONNECTION.QUERY?
-function addViewUpdate() {
-    inquirer
-        .prompt({
-            type: "list",
-            name: "addViewUpdate",
-            message: "Would you like to add DRE, view DRE, or update an employee profile?",
-            choices: ["Add", "View", "Update", "Exit"]
-        })
-        .then(function (answer) {
-            //Add the item that the user chose
-            if (answer.addViewUpdate === "Add") {
-                addDRE();
-            }
-            else if (answer.addViewUpdate === "View") {
-              viewDRE();
-            }
-            else if (answer.addViewUpdate === "Update") {
-                updateEmployee();
-            }
-            else {
-                connection.end();
-            }
-        });
-}
 function addDRE() {
     inquirer
         .prompt({
             type: "list",
-            name: "addDRE",
-            message: "Choose an item to add",
-            choices: ["Department", "Role", "Employee", "Exit"]
+            name: "addUpdateView",
+            message: "Choose an action",
+            choices: [" Add Department", "Add Role", "Add Employee", "View Department", "View Role", "View Employee", "Update Employee Profile", "Exit"]
         })
         .then(function (answer) {
-            if (answer.addDRE === "Department") {
-                //ADD DEPT
+            switch (answer.addDRE) {
+                case "add Departments":
+                    addDept();
+                    break;
+
+                case "add Role":
+                    addRole();
+                    break;
+
+                case "add Employee":
+                    addEmployee();
+                    break;
+
+                case "view Dept":
+                    viewDept();
+                    break;
+                case "view Role":
+                    viewRole();
+                    break;
+                case "view Employee":
+                    viewEmployee();
+                    break;
+
+                case "Update Employee":
+                    updateEmployee();
+                    break;
+
+                case "Exit":
+                    connection.end();
+                    break;
             }
-            else if (answer.addDRE === "Role") {
-                //ADD ROLE
-            }
-            else if (answer.addDRE === "Employee") {
-                //ADD EMPLOYEE
-            }
-            else {
-                connection.end();
-            }
-            viewDRE();
         });
+    }
 
-        function viewDRE() {
-            inquirer
-                .prompt({
-                    type: "list",
-                    name: "viewDRE",
-                    message: "Choose an item to view",
-                    choices: ["Department", "Role", "Employee", "Exit"]
-                })
-                .then(function (answer) {
-                    if (answer.viewDRE === "Department") {
-                        //VIEW DEPT
-                        connection.query("SELECT * FROM .......", function(err, data){
-                            //We need to get the data back from the server before calling updateEmployee
-                            updateEmployee();
-                        })
-                    }
-                    else if (answer.viewDRE === "Role") {
-                        //VIEW DEPT
-                    }
-                    else if (answer.viewDRE === "Employee") {
-                        //VIEW DEPT
-                    }
-                    else {
-                        connection.end();
-                    }
-                    
-                });
-
-                function updateEmployee() {
-                    inquirer
-                        .prompt({
-                            type: "list",
-                            name: "updateEmployee",
-                            message: "Choose an employee to update",
-                            //Add list of employees here
-                            choices: ["Department", "Role", "Employee", "Exit"]
-                        })
-                        .then(function (answer) {
-                            if (answer.updateEmployee === "Department") {
-                                //VIEW DEPT
-                            }
-                            else if (answer.updateEmployee === "Role") {
-                                //VIEW DEPT
-                            }
-                            else if (answer.updateEmployee === "Employee") {
-                                //VIEW DEPT
-                            }
-                            else {
-                                connection.end();
-                            }
-                        });
+       
                 
-        
-
-    //Need to call functions in here but can define them elsewhere
-    
-}
-
-
-
-//View Departments, Roles, and Employees
-
-
