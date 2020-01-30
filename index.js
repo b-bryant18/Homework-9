@@ -1,38 +1,78 @@
-module.exports = function(app){
-function addDept()
-function addRole()
-function addEmployee()
-function viewDept()
-function viewRole()
-function viewEmployee()
-function updateEmployee()
+module.exports = function (app) {
+    function addDept() {
+        console.log("Adding new department\n");
+        var query = connection.query(
+            "INSERT INTO department SET ?",
+            {
+                deptName: "",
+                //user's new department name here
+            },
+            function (err, res) {
+                if (err) throw err;
+                console.log(res.affectedRows + "department added\n");
+            }
+        )
+        console.log(query.sql);
+    }
 
-    function viewDRE() {
-        inquirer
-            .prompt({
-                type: "list",
-                name: "viewDRE",
-                message: "Choose an item to view",
-                choices: ["Department", "Role", "Employee", "Exit"]
-            })
-            .then(function (answer) {
-                if (answer.viewDRE === "Department") {
-                    //VIEW DEPT
-                    connection.query("SELECT * FROM .......", function (err, data) {
-                        //We need to get the data back from the server before calling updateEmployee
-                        updateEmployee();
-                    })
-                }
-                else if (answer.viewDRE === "Role") {
-                    connection.query("SELECT * FROM .......", function (err, data) {
-                    })
-                }
-                else if (answer.viewDRE === "Employee") {
-                    connection.query("SELECT * FROM .......", function (err, data) {
-                    })
-                }
-                else {
-                    connection.end();
-                }
-            });
+    function addRole() {
+        console.log("Adding new role\n");
+        connection.query(
+            "INSERT INTO role SET ?",
+            {
+                title: "",
+                salary: "",
+                department_id: "",
+            },
+            function (err, res) {
+                if (err) throw err;
+                console.log(res.affectedRows + "department added\n");
+            }
+        )
+        console.log(query.sql);
+    }
+    function addEmployee() {
+        console.log("Adding new role\n");
+        connection.query(
+            "INSERT INTO Employee SET ?",
+            {
+                firstName: "",
+                lastName: "",
+                role_id: "",
+                manager_id: "",
+            },
+            function (err, res) {
+                if (err) throw err;
+                console.log(res.affectedRows + "department added\n");
+            }
+        )
+        console.log(query.sql);
+    }
+
+//View Functions
+    function viewDept() {
+        SELECT * FROM
+     }
+    function viewRole() { }
+    function viewEmployee() { }
+
+//Update Employee Profile function
+    function updateEmployee() {
+        console.log("Adding new role\n");
+        connection.query(
+            "UPDATE employee SET ?",
+            {
+                firstName: "",
+                lastName: "",
+                role_id: "",
+                manager_id: "",
+            },
+            function (err, res) {
+                if (err) throw err;
+                console.log(res.affectedRows + "employee added\n");
+            }
+        )
+    }
+}
+
 }
