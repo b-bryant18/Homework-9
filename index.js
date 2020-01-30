@@ -10,8 +10,7 @@ module.exports = function (app) {
             function (err, res) {
                 if (err) throw err;
                 console.log(res.affectedRows + "department added\n");
-            }
-        )
+            })
         console.log(query.sql);
     }
 
@@ -27,8 +26,7 @@ module.exports = function (app) {
             function (err, res) {
                 if (err) throw err;
                 console.log(res.affectedRows + "department added\n");
-            }
-        )
+            })
         console.log(query.sql);
     }
     function addEmployee() {
@@ -44,19 +42,35 @@ module.exports = function (app) {
             function (err, res) {
                 if (err) throw err;
                 console.log(res.affectedRows + "department added\n");
-            }
-        )
+            })
         console.log(query.sql);
     }
 
-//View Functions
+    //View Functions
     function viewDept() {
-        SELECT * FROM
-     }
-    function viewRole() { }
-    function viewEmployee() { }
+        connection.query(
+            "SELECT * FROM department WHERE name = ?",
+            function (err, res) {
+                if (err) throw err;
+            })
+    }
+    function viewRole() {
+        connection.query(
+            "SELECT * FROM department WHERE name = ?",
+            function (err, res) {
+                if (err) throw err;
+            })
+    }
 
-//Update Employee Profile function
+    function viewEmployee() {
+        connection.query(
+            "SELECT * FROM department WHERE name = ?",
+            function (err, res) {
+                if (err) throw err;
+            })
+    }
+
+    //Update Employee Profile function
     function updateEmployee() {
         console.log("Adding new role\n");
         connection.query(
