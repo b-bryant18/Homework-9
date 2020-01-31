@@ -27,6 +27,15 @@ VALUES
 ("George", "Seinfeld" 8, 7),
 ("Elaine", "Seinfeld" 9, 7),
 
+SELECT department.deptName, role.title, employee.firstName 
+FROM ((department
+INNER JOIN role ON department.title = role.department_id;
+INNER JOIN employee ON department.firstName = employee.firstName;
+
+-- SELECT Orders.OrderID, Customers.CustomerName, Shippers.ShipperName
+-- FROM ((Orders
+-- INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID)
+-- INNER JOIN Shippers ON Orders.ShipperID = Shippers.ShipperID);
 
 
 
