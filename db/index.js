@@ -4,6 +4,7 @@ class db {
     constructor(connection) {
         this.connection = connection;
     }
+    //Add Functions
     addDept(department) {
         return this.connection.query("INSERT INTO department SET ?", department)
     }
