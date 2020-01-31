@@ -1,80 +1,77 @@
 //Dependencies
-const express = require("express");
-const mysql = require("mysql");
-const inquirer = require("inquirer");
-const index = require("./index");
-var inquire = require('inquirer')
+const { prompt } = require("inquirer");
+const db = require("./db");
 
-//Variable for running the express method
-var app = express();
-
-//Establishes the port for Heroku or local servers
-var PORT = process.env.PORT || 3306;
-
-var connection = mysql.createConnection({
-    host: "localhost",
-    port: 3306,
-    user: "root",
-    password: "password",
-    database: "employee_db"
-});
-
-//Initiate mySQl Connection
-connection.connect(function (err) {
-    if (err) {
-        console.error("error connecting:" + err.stack);
-        return;
-    }
-    console.log("Connected as id" + connection.threadId);
-    //Runs the add Dept, Role, or Employee function defined below
-    // addViewUpdate();
-    addDRE();
-});
+//Runs the add Dept, Role, or Employee function defined below
+// addViewUpdate();
+addDRE();
 
 //Inquirer Prompts for User
-
-function addDRE() {
-    inquirer
-        .prompt({
+async function loadPrompts() {
+    const { choice } = await prompt([
+        {
             type: "list",
             name: "addUpdateView",
             message: "Choose an action",
-            choices: [" Add Department", "Add Role", "Add Employee", "View Department", "View Role", "View Employee", "Update Employee Profile", "Exit"]
-        })
-        .then(function (answer) {
-            switch (answer.addDRE) {
-                case "add Departments":
-                    addDept();
-                    break;
+            choices: [
+                {
+                    name: "Add Department",
+                    value: "add_Department"
+                },
+                {
+                    name: "Add Role",
+                    value: "add_role"
+                },
+                {
+                    name: "Add Employee",
+                    value: "add_Employee"
+                },
+                {
+                    name: "View Department",
+                    value: "view_Department"
+                },
+                {
+                    name: "View Role",
+                    value: "view_Role"
+                },
+                {
+                    name: "View Employee",
+                    value: "view_Employee"
+                },
+                {
+                    name: "Update Employee",
+                    value: "update_Employee"
+                }
+            ]
+        }
+    ])
 
-                case "add Role":
-                    addRole();
-                    break;
+    switch (choice) {
+        case "add Departments":
+            return db.addDept();
 
-                case "add Employee":
-                    addEmployee();
-                    break;
+        case "add Role":
+            return db.addRole();
 
-                case "view Dept":
-                    viewDept();
-                    break;
-                case "view Role":
-                    viewRole();
-                    break;
-                case "view Employee":
-                    viewEmployee();
-                    break;
+        case "add Employee":
+            return db.addEmployee();
 
-                case "Update Employee":
-                    updateEmployee();
-                    break;
+        case "view Dept":
+            return db.viewDept();
 
-                case "Exit":
-                    connection.end();
-                    break;
-            }
-        });
+        case "view Role":
+            return db.viewRole();
+
+        case "view Employee":
+            return db.viewEmployee();
+
+        case "Update Employee":
+            return db.updateEmployee();
+
+        case "Exit":
+            connection.end();
+            break;
     }
 
-       
-                
+
+
