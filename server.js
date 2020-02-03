@@ -34,6 +34,7 @@ function addViewUpdate() {
                     }).then(function (answer) {
                         return db.addDept(answer.deptName);
                     })
+                    break;
 
                 case "Add Role":
                     inquirer.prompt({
@@ -43,6 +44,7 @@ function addViewUpdate() {
                     }).then(function (answer) {
                         return db.addRole(answer.addRole);
                     })
+                    break;
 
                 case "Add Employee":
                     inquirer.prompt({
@@ -52,6 +54,7 @@ function addViewUpdate() {
                     }).then(function (answer) {
                         return db.addEmployee(answer.addEmployee);
                     })
+                    break;
 
                 case "View Department":
                    inquirer.prompt({
@@ -63,16 +66,20 @@ function addViewUpdate() {
                        return db.viewDept();
                        //should this be db.viewDept(); ?
                    })
+                   break;
                    
 
                 case "View Role":
                     return db.viewRole();
+                    break;
 
                 case "View Employee":
                     return db.viewEmployee();
+                    break;
 
                 case "Update Employee":
                     return db.updateEmployee();
+                    break;
 
                 case "Exit":
                     connection.end();
