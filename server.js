@@ -1,77 +1,84 @@
 //Dependencies
-const { prompt } = require("inquirer");
+const {prompt}  = require("inquirer");
 const db = require("./db");
-
-//Runs the add Dept, Role, or Employee function defined below
-// addViewUpdate();
-addDRE();
+const inquirer = require("inquirer");
 
 //Inquirer Prompts for User
-async function loadPrompts() {
-    const { choice } = await prompt([
-        {
+//User choice runs the functions below that are defined in index.js.
+
+function addViewUpdate() {
+    inquirer
+        .prompt({
+            name: "Add_dept",
             type: "list",
-            name: "addUpdateView",
-            message: "Choose an action",
+            message: "Choose an action from the list",
             choices: [
-                {
-                    name: "Add Department",
-                    value: "add_Department"
-                },
-                {
-                    name: "Add Role",
-                    value: "add_role"
-                },
-                {
-                    name: "Add Employee",
-                    value: "add_Employee"
-                },
-                {
-                    name: "View Department",
-                    value: "view_Department"
-                },
-                {
-                    name: "View Role",
-                    value: "view_Role"
-                },
-                {
-                    name: "View Employee",
-                    value: "view_Employee"
-                },
-                {
-                    name: "Update Employee",
-                    value: "update_Employee"
-                }
+                "Add Department",
+                "Add Role",
+                "Add Employee",
+                "View Department",
+                "View Role",
+                "View Employee",
+                "Update Employee",
+                "Exit"
             ]
-        }
-    ])
+        })//Calls functions based on user's choices
+        .then(function (answer) {
+            console.log("answer: " + answer.Add_dept);
+            switch (answer.Add_dept) {
+                case "Add Department":
+                    inquirer.prompt({
+                        type: "input",
+                        message: "Name your new a department",
+                        name: "deptName"
+                    }).then(function (answer) {
+                        return db.addDept(answer.deptName);
+                    })
 
-    switch (choice) {
-        case "add Departments":
-            return db.addDept();
+                case "Add Role":
+                    inquirer.prompt({
+                        type: "input",
+                        message: "Name your new role",
+                        name: "roleName"
+                    }).then(function (answer) {
+                        return db.addRole(answer.addRole);
+                    })
 
-        case "add Role":
-            return db.addRole();
+                case "Add Employee":
+                    inquirer.prompt({
+                        type: "input",
+                        message: "Name your new employee",
+                        name: "employeeName"
+                    }).then(function (answer) {
+                        return db.addEmployee(answer.addEmployee);
+                    })
 
-        case "add Employee":
-            return db.addEmployee();
+                case "View Department":
+                   inquirer.prompt({
+                       type: "list",
+                       message: "Select a department",
+                       name: "viewDepartment",
+                       choices: ["Accounting", "IT", "Sales"]
+                   }).then(function (answer) {
+                       return db.viewDept();
+                       //should this be db.viewDept(); ?
+                   })
+                   
 
-        case "view Dept":
-            return db.viewDept();
+                case "View Role":
+                    return db.viewRole();
 
-        case "view Role":
-            return db.viewRole();
+                case "View Employee":
+                    return db.viewEmployee();
 
-        case "view Employee":
-            return db.viewEmployee();
+                case "Update Employee":
+                    return db.updateEmployee();
 
-        case "Update Employee":
-            return db.updateEmployee();
+                case "Exit":
+                    connection.end();
+                    break;
+            }
+        })
+};
 
-        case "Exit":
-            connection.end();
-            break;
-    }
-
-
-
+addViewUpdate();
