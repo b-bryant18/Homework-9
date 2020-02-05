@@ -7,7 +7,11 @@ class db {
     }
     //Add Functions
     addDept(dept) {
-            return this.connection.query("INSERT INTO department SET ?", {deptName: dept})
+            return this.connection.query("INSERT INTO department SET ?", {deptName: dept}, function(err, res) {
+                if (err) throw err;
+
+                console.log("success")
+            })
         }
 
     addRole(role) {
@@ -19,6 +23,7 @@ class db {
 
     //View Functions
     viewDept(department) {
+        console.log("department: "+ department);
             return this.connection.query("SELECT * FROM department WHERE deptName = ?", [department])
         }
     viewRole(role) {

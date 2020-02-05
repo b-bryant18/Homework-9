@@ -18,14 +18,14 @@ VALUES
 INSERT INTO employee (firstName, lastName, role_id, manager_id)
 VALUES
 ("Bob", "Belcher",     1, NULL),
-("Linda", "Belcher"    2, 1),
-("Tina", "Belcher" 3, 1),
+("Linda", "Belcher",   2, 1),
+("Tina", "Belcher", 3, 1),
 ("Mags", "Smith", 4, NULL),
-("Kimi", "Smith" 5, 4),
-("Josh", "Smith" 6, 4),
+("Kimi", "Smith", 5, 4),
+("Josh", "Smith", 6, 4),
 ("Jerry", "Seinfeld", 7, NULL),
-("George", "Seinfeld" 8, 7),
-("Elaine", "Seinfeld" 9, 7),
+("George", "Seinfeld", 8, 7),
+("Elaine", "Seinfeld", 9, 7);
 
 SELECT department.deptName, role.title, employee.firstName 
 FROM ((department

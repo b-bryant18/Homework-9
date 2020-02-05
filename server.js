@@ -3,6 +3,8 @@ const {prompt}  = require("inquirer");
 const db = require("./db");
 const inquirer = require("inquirer");
 
+
+
 //Inquirer Prompts for User
 //User choice runs the functions below that are defined in index.js.
 
@@ -32,7 +34,9 @@ function addViewUpdate() {
                         message: "Name your new a department",
                         name: "deptName"
                     }).then(function (answer) {
-                        return db.addDept(answer.deptName);
+                        console.log("answer: " + answer.deptName);
+                        db.addDept(answer.deptName);
+                        addViewUpdate();
                     })
                     break;
 
@@ -64,7 +68,6 @@ function addViewUpdate() {
                        choices: ["Accounting", "IT", "Sales"]
                    }).then(function (answer) {
                        return db.viewDept();
-                       //should this be db.viewDept(); ?
                    })
                    break;
                    
